@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Create User Account";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h1 class="text-center">Create User Account</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="UserManagement" asp-action="AddUser">
+                        <div class="mb-3">
+                            <label for="student_id" class="form-label">Student ID</label>
+                            <input type="text" name="student_id" id="student_id" class="form-control" placeholder="ex. User" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" placeholder="ex. User" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="text" name="password" id="password" class="form-control" placeholder="******" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Fullname</label>
+                            <input type="text" name="fullname" id="fullname" class="form-control" placeholder="ex. User" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="authorization" class="form-label">Authorization</label>
+                            <input type="text" name="authorization" id="authorization" class="form-control" placeholder="ex. User" />
+                        </div>
+
+                        <div class="text-left pt-1 mb-5 pb-1">
+                            <button class="btn btn-primary btn-block" type="submit">Create</button>
+                        </div>
+                    </form>
+                    <a href="javascript:history.back()" class="text-center d-block mt-3">← Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

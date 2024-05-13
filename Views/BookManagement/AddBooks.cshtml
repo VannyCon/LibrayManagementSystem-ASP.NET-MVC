@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Create User Account";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h1 class="text-center">Create User Account</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="BookManagement" asp-action="AddBooks">
+                        <div class="mb-3">
+                            <label for="book_title" class="form-label">Title</label>
+                            <input type="text" name="book_title" id="book_title" class="form-control" placeholder="Chronicles" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_author" class="form-label">Author</label>
+                            <input type="text" name="book_author" id="book_author" class="form-control" placeholder="Zuckerberg" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_category" class="form-label">Category</label>
+                            <input type="text" name="book_category" id="book_category" class="form-control" placeholder="Zuckerberg" />
+                        </div>
+
+
+                        <div class="text-left pt-1 mb-5 pb-1">
+                            <button class="btn btn-primary btn-block" type="submit">Create</button>
+                        </div>
+                    </form>
+                    <a href="javascript:history.back()" class="text-center d-block mt-3">← Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

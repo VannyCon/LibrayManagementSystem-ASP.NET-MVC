@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using System.Globalization
+
+<div class="card text-dark container my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section >
+
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center mb-4">
+
+            <!--Grid column-->
+            <div class="col-md-10
+">
+                @model IEnumerable<BooksLog>
+                <!-- Inline CSS -->
+                <div class="d-flex justify-content-between">
+                    <h1 class="text-500 text-dark my-3">Request Log</h1>
+                    <a asp-controller="AdminHomepage" asp-action="AddBooksLogs" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">Request</a>
+                </div>
+
+                <table class="custom-table text-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Fullname</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">Books Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Get Date</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var books in Model)
+                        {
+                            <tr>
+                                <th scope="row">@books.id</th>
+                                <td>@books.student_fullname</td>
+                                <td>@books.student_id_fk</td>
+                                <td>@books.book_id</td>
+                                <td>@books.book_title</td>
+                                <td>@books.book_author</td>
+                                <td>@books.book_category</td>
+                                <td>@DateTime.ParseExact(books.book_get_date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("MMMM dd, yyyy")</td>
+                                <td>@DateTime.ParseExact(books.book_due_date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("MMMM dd, yyyy")</td>
+                                <td class="d-flex">
+                                    <a asp-controller="AdminHomepage" asp-action="Edit" asp-route-id="@books.id" class="btn btn-primary  my-3 text-center mx-2 text-decoration-none" type="button">EDIT</a>
+                                    <a asp-controller="AdminHomepage" asp-action="Delete" asp-route-id="@books.id" class="btn btn-danger my-3 text-center text-decoration-none" type="button">DELETE</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>

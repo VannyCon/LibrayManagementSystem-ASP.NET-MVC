@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using System.Globalization
+
+<div class="card text-dark container my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section>
+
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center mb-4">
+
+            <!--Grid column-->
+            <div class="col-md-10
+">
+                @model IEnumerable<Books>
+
+                <table class="custom-table text-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var books in Model)
+                        {
+                            <tr>
+                                <th scope="row">@books.id</th>
+                                <td>@books.book_title</td>
+                                <td>@books.book_author</td>
+                                <td>@books.book_category</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>

@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="card text-dark container my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section >
+
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center mb-4">
+
+            <!--Grid column-->
+            <div class="col-md-10
+">
+                @model IEnumerable<Books>
+                <!-- Inline CSS -->
+                <div class="d-flex justify-content-between">
+                    <h1 class="text-500 text-dark my-3">Books</h1>
+                    <a asp-controller="BookManagement" asp-action="AddBooks" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">CREATE</a>
+                </div>
+
+                <table class="custom-table text-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var books in Model)
+                        {
+                            <tr>
+                                <th scope="row">@books.id</th>
+                                <td>@books.book_title</td>
+                                <td>@books.book_author</td>
+                                <td>@books.book_category</td>
+                                <td class="d-flex">
+                                    <a asp-controller="BookManagement" asp-action="Edit" asp-route-id="@books.id" class="btn btn-primary  my-3 text-center mx-2 text-decoration-none" type="button">EDIT</a>
+                                    <a asp-controller="BookManagement" asp-action="Delete" asp-route-id="@books.id" class="btn btn-danger my-3 text-center text-decoration-none" type="button">DELETE</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>

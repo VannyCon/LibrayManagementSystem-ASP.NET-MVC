@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Create User Account";
+}
+@model IndexViewModel
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h1 class="text-center">Create User Account</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="AdminHomepage" asp-action="AddBooksLogs">
+                        <label for="student_id_fk" class="form-label">Student Id</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle w-100"
+                                    type="button"
+                                    id="dropdownMenuButtonBooks"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Select Book
+                            </button>
+                            <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButtonBooks">
+                                <li>
+                                    <input type="text"
+                                           class="form-control dropdown-search-input"
+                                           id="dropdownSearchInputBooks"
+                                           placeholder="Search for a book..." />
+                                </li>
+                                @foreach (var book in Model.books)
+                                {
+                                    <li><a class="dropdown-item" href="#" data-value="@book.book_title">@book.book_title</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <label for="student_id_fk" class="form-label">Student Id</label>
+                            <input type="text" name="student_id_fk" id="student_id_fk" class="form-control" placeholder="Zuckerberg" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_id" class="form-label">Book ID</label>
+                            <input type="text" name="book_id" id="book_id" class="form-control" placeholder="Zuckerberg" />
+                        </div>
+                        <label for="student_id_fk" class="form-label">Book Id</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle w-100"
+                                    type="button"
+                                    id="dropdownMenuButtonStudents"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Select Student
+                            </button>
+                            <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButtonStudents">
+                                <li>
+                                    <input type="text"
+                                           class="form-control dropdown-search-input"
+                                           id="dropdownSearchInputStudents"
+                                           placeholder="Search for a student..." />
+                                </li>
+                                @foreach (var student in Model.studentinfo)
+                                {
+                                    <li><a class="dropdown-item" href="#" data-value="@student.fullname">@student.fullname</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_get_date" class="form-label">Get Date</label>
+                            <input type="date" name="book_get_date" id="book_get_date" class="form-control" placeholder="Zuckerberg" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="book_due_date" class="form-label">Due Date</label>
+                            <input type="date" name="book_due_date" id="book_due_date" class="form-control" placeholder="Zuckerberg" />
+                        </div>
+
+                        <div class="text-left pt-1 mb-5 pb-1">
+                            <button class="btn btn-primary btn-block" type="submit">Create</button>
+                        </div>
+                    </form>
+                    <a href="javascript:history.back()" class="text-center d-block mt-3">← Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
