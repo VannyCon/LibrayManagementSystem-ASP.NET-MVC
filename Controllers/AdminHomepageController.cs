@@ -11,8 +11,6 @@ namespace LibrayManagementSystemMVC.Controllers
     public class AdminHomepageController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly HttpClient _httpClient2;
-        private readonly HttpClient _httpClient3;
         private readonly ILogger<AdminHomepageController> _logger; // Add ILogger
 
         public AdminHomepageController(ILogger<AdminHomepageController> logger)
@@ -24,19 +22,6 @@ namespace LibrayManagementSystemMVC.Controllers
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            _httpClient2 = new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:7158/Library")
-            };
-            _httpClient2.DefaultRequestHeaders.Accept.Clear();
-            _httpClient2.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            _httpClient3 = new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:7158/UserManagement")
-            };
-            _httpClient3.DefaultRequestHeaders.Accept.Clear();
-            _httpClient3.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             _logger = logger; // Initialize ILogger
         }
@@ -44,25 +29,8 @@ namespace LibrayManagementSystemMVC.Controllers
 
         public async Task<ActionResult> AddBooksLogs()
         {
-            var response = await _httpClient2.GetAsync("");
-            var response2 = await _httpClient3.GetAsync("");
 
-            var json = await response.Content.ReadAsStringAsync();
-            var books = JsonConvert.DeserializeObject<List<Books>>(json);
-            var json2 = await response2.Content.ReadAsStringAsync();
-            var studentInfos = JsonConvert.DeserializeObject<List<AccountModel>>(json2);
-            var filteredStudentInfos = studentInfos?.Where(si => si.student_id != 0).ToList();
-            // You cannot pass multiple models directly to the view, 
-            // so you need to use a ViewModel or ViewBag to pass multiple data to the view.
-
-            // Using a ViewModel approach
-            var viewModel = new IndexViewModel
-            {
-                books = books ?? new List<Books>(),
-                studentinfo = filteredStudentInfos ?? new List<AccountModel>()
-            };
-            // Pass ViewModel to the view
-            return View(viewModel);
+            return View();
         }
 
         //CREATE

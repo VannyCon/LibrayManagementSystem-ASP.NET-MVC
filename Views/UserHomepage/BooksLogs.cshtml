@@ -18,8 +18,10 @@
 ">
                 @model IEnumerable<BooksLog>
 
-
-                <table class="custom-table text-dark">
+                <div class="mb-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search for books..." onkeyup="searchTable()">
+                </div>
+                <table id="booksTable" class="custom-table text-dark">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>

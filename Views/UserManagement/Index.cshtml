@@ -17,13 +17,17 @@
             <div class="col-md-10
 ">
                 @model IEnumerable<AccountModel>
+                <a asp-controller="UserManagement" asp-action="AddUser" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">CREATE</a>
+
                 <!-- Inline CSS -->
                 <div class="d-flex justify-content-between">
                     <h1 class="text-500 text-dark my-3">USER</h1>
-                    <a asp-controller="UserManagement" asp-action="AddUser" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">CREATE</a>
-                </div>
+                    <div class="mb-3">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search for books..." onkeyup="searchTable()">
+                    </div>
+                     </div>
 
-                <table class="custom-table text-dark">
+                <table id="booksTable" class="custom-table text-dark">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>

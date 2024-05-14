@@ -4,26 +4,27 @@
 @using System.Globalization
 
 <div class="card text-dark container my-5 py-5 z-depth-1">
-
-
     <!--Section: Content-->
-    <section >
-
-
+    <section>
         <!--Grid row-->
         <div class="row d-flex justify-content-center mb-4">
-
             <!--Grid column-->
-            <div class="col-md-10
-">
+            <div class="col-md-10">
                 @model IEnumerable<BooksLog>
+                <a asp-controller="AdminHomepage" asp-action="AddBooksLogs" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">Request</a>
                 <!-- Inline CSS -->
                 <div class="d-flex justify-content-between">
                     <h1 class="text-500 text-dark my-3">Request Log</h1>
-                    <a asp-controller="AdminHomepage" asp-action="AddBooksLogs" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">Request</a>
+                    
+                    <!-- Search Bar -->
+                    <div class="mb-3">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search for books..." onkeyup="searchTable()">
+                    </div>
                 </div>
 
-                <table class="custom-table text-dark">
+
+
+                <table id="booksTable" class="custom-table text-dark">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -52,24 +53,17 @@
                                 <td>@DateTime.ParseExact(books.book_get_date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("MMMM dd, yyyy")</td>
                                 <td>@DateTime.ParseExact(books.book_due_date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("MMMM dd, yyyy")</td>
                                 <td class="d-flex">
-                                    <a asp-controller="AdminHomepage" asp-action="Edit" asp-route-id="@books.id" class="btn btn-primary  my-3 text-center mx-2 text-decoration-none" type="button">EDIT</a>
+                                    <a asp-controller="AdminHomepage" asp-action="Edit" asp-route-id="@books.id" class="btn btn-primary my-3 text-center mx-2 text-decoration-none" type="button">EDIT</a>
                                     <a asp-controller="AdminHomepage" asp-action="Delete" asp-route-id="@books.id" class="btn btn-danger my-3 text-center text-decoration-none" type="button">DELETE</a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-
-
             </div>
             <!--Grid column-->
-
         </div>
         <!--Grid row-->
-
-
     </section>
     <!--Section: Content-->
-
-
 </div>
