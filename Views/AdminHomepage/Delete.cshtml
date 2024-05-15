@@ -8,8 +8,9 @@
                     <h1 class="text-center">Delete User Account</h1>
                 </div>
                 <div class="card-body">
+                    <!-- this form will handle a post Request to controller, then pass the ID to DeleteConfirmed Function to Delete a Data-->
                     <form asp-controller="AdminHomepage" asp-action="DeleteConfirmed" asp-route-id="@Model.id" method="post">
-
+                        <!-- student_id_fk is the column of the table, which is from on the model, same to  book_id,book_get_date,book_due_date -->
                         <div class="mb-3">
                             <label asp-for="student_id_fk" class="form-label">Student ID</label>
                             <input asp-for="student_id_fk" type="text" class="form-control" readonly />

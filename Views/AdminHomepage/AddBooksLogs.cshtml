@@ -10,7 +10,9 @@
                     <h1 class="text-center">Create User Account</h1>
                 </div>
                 <div class="card-body">
+                    <!-- this form will handle a post Request to controller which will send to api and INSERT DATA-->
                     <form method="post" asp-controller="AdminHomepage" asp-action="AddBooksLogs">
+                        <!-- student_id_fk is the column of the table, which is from on the model, same to  book_id,book_get_date,book_due_date -->
                         <div class="mb-3">
                             <label for="student_id_fk" class="form-label">Student Id</label>
                             <input type="text" name="student_id_fk" id="student_id_fk" class="form-control" placeholder="Zuckerberg" />

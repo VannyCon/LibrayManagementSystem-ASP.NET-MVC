@@ -74,16 +74,15 @@ namespace LibrayManagementSystemMVC.Controllers
                     ViewBag.Hasauthorization = true;
                     ViewBag.Username = "user";
 
-                    // Ensure id is of type int
+                    //In homecontroller it make a session which is the reason we can access the studentId globally
+                    //The studentId is put in to the varible int id then it will have int value ex. 4 
                     int? id = HttpContext.Session.GetInt32("studentId");
                     var userAcc = await response.Content.ReadAsAsync<List<BooksLog>>();
-
-                    _logger.LogInformation($"stage 1 Student ID retrieved from session: {id}");
                     // Check if id is not null before filtering
                     if (id != null)
                     {
-                        _logger.LogInformation($" stage 2 Student ID retrieved from session: {id}");
                         // Filter the list based on the provided id
+                        // the int id have a value  ex. 4 which will be use as argument to get a specific data or to filter the data that will display
                         var filteredUserAcc = userAcc.Where(x => x.student_id_fk == id).ToList();
                         return View(filteredUserAcc);
                     }

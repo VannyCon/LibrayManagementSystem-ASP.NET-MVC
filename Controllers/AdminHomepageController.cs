@@ -15,6 +15,9 @@ namespace LibrayManagementSystemMVC.Controllers
 
         public AdminHomepageController(ILogger<AdminHomepageController> logger)
         {
+
+            //This part is to put in _httpCLient the URL of the API
+
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://localhost:7158/LibraryLog")
@@ -26,14 +29,14 @@ namespace LibrayManagementSystemMVC.Controllers
             _logger = logger; // Initialize ILogger
         }
 
-
+        //Return View To AddBooksLogs.cshtml
         public async Task<ActionResult> AddBooksLogs()
         {
 
             return View();
         }
 
-        //CREATE
+        //This Part is Responsible to POST REQUEST to WEB API which is responsible also to INSERT DATA to Database
         [HttpPost]
         public async Task<IActionResult> AddBooksLogs(BooksLog book)
         {
@@ -42,23 +45,25 @@ namespace LibrayManagementSystemMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    // Log the userAcc object
-                    Console.WriteLine($"UserAcc object: {book}");
 
+
+                    //This part is how to make HTTP Request POST to EndPOINT  which is "LibraryLog" 
                     var request = new HttpRequestMessage(HttpMethod.Post, "LibraryLog");
                     var jsonContent = JsonConvert.SerializeObject(book);
                     request.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
+                    //This is the line of code to SEND HTTP REQUEST
                     var response = await _httpClient.SendAsync(request);
 
+                    //If the Response is Success then this block of code will be run
                     if (response.IsSuccessStatusCode)
                     {
-
+                        //if Success then go to AdminHomepage/Index.cshtml
                         return RedirectToAction("Index", "AdminHomepage");
                     }
                     else
                     {
-                        // Handle error response
+                        //if Have Error then go to AdminHomepage/AddBooksLogs.cshtml which will return to same page
                         return RedirectToAction("AddBooksLogs", "AdminHomepage");
                     }
                 }
@@ -77,20 +82,23 @@ namespace LibrayManagementSystemMVC.Controllers
         }
 
 
-        //READ
+        //This Part is Responsible to GET REQUEST to WEB API which is responsible also to RETREIVE DATA to Database
         public async Task<ActionResult> Index()
         {
             try
             {
-
+                //This part will make a get http request to web api
                 var response = await _httpClient.GetAsync("");
 
                 if (response.IsSuccessStatusCode)
                 {
+                   //if success the viewbag will have a value where it will use to other logic like display a navbar
                     ViewBag.Hasauthorization = true;
                     ViewBag.Username = "admin";
-                    var userAcc = await response.Content.ReadAsAsync<List<BooksLog>>();
-                    return View(userAcc);
+                    //put to content in variable which post
+                    var post = await response.Content.ReadAsAsync<List<BooksLog>>();
+                    //this will return to view/ which on index.cshtml
+                    return View(post);
                 }
                 else
                 {
@@ -106,7 +114,7 @@ namespace LibrayManagementSystemMVC.Controllers
             }
         }
 
-        //GET USER
+        //This Part is Responsible to GET USER BY ID REQUEST to WEB API which is responsible also to RETREIVE A SPECIFIC DATA to Database
         public async Task<ActionResult> Edit(int id)
         {
             try
@@ -125,6 +133,7 @@ namespace LibrayManagementSystemMVC.Controllers
                         var userAcc = userAccList.FirstOrDefault();
                         if (userAcc != null)
                         {
+                            //this will return to view which will be use to return on update 
                             return View(userAcc);
                         }
                         else
@@ -153,7 +162,7 @@ namespace LibrayManagementSystemMVC.Controllers
             }
         }
 
-        //UPDATE
+        //This Part is Responsible to PUT REQUEST to WEB API which is responsible also to UPDATE A SPECIFIC DATA to Database
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(BooksLog userAcc)
@@ -167,19 +176,20 @@ namespace LibrayManagementSystemMVC.Controllers
                 }
 
 
-
+                //This part is how to make HTTP Request POST to EndPOINT  which is "LibraryLog" 
                 var request = new HttpRequestMessage(HttpMethod.Put, "LibraryLog");
                 var jsonContent = JsonConvert.SerializeObject(userAcc);
                 request.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
+                //This part will send a request to web api
                 var response = await _httpClient.SendAsync(request);
 
                 // Check if the request was successful
                 if (response.IsSuccessStatusCode)
                 {
 
+                    //if response is success which is 200 status this part will be redirect to Admin Homepage Index to show the Table Update
                     // Log success or any relevant information
-                    _logger.LogInformation("User account updated successfully.");
                     return RedirectToAction("Index", "AdminHomepage"); // Assuming there's an Index action method to redirect to
                 }
                 else
@@ -197,8 +207,7 @@ namespace LibrayManagementSystemMVC.Controllers
             }
         }
 
-
-        //GET USER
+        //This Part is Responsible to GET USER BY ID REQUEST to WEB API which is responsible also to RETREIVE A SPECIFIC DATA to Database
         public async Task<ActionResult> Delete(int id)
         {
             try
@@ -246,6 +255,7 @@ namespace LibrayManagementSystemMVC.Controllers
             }
         }
 
+        //This Part is Responsible to DELETE REQUEST to WEB API which is responsible also to DELETE A SPECIFIC DATA to Database
         [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

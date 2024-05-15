@@ -24,29 +24,39 @@ namespace LibrayManagementSystemMVC.Controllers
             _logger = logger;
         }
 
+        //This Part is Responsible to POST REQUEST to WEB API which is responsible also to LOG IN
         [HttpPost]
         public async Task<IActionResult> Index(AccountModel model) // Use the correct model type
         {
+            //declare the Variable that get from the MODEL
             string user = model.username;
             string password = model.password;
+            //Serialize the Model
             var jsonBody = JsonConvert.SerializeObject(new { username = user, password = password });
 
             try // Handle potential exceptions during HTTP request
             {
+                //This will make a respost to WEB API
                 var response = await _httpClient.PostAsync("https://localhost:7158/Login/Request", new StringContent(jsonBody, Encoding.UTF8, "application/json"));
 
+                //If success then the block of code will be run
                 if (response.IsSuccessStatusCode)
                 {
+                    //This is line of code is responsible read the response from the WEB API
                     string content = await response.Content.ReadAsStringAsync();
+                    //This line will put the response json into content then deserialize, its mean that from json you can instance it now like this ex. jsonObject.authorization
                     dynamic jsonObject = JsonConvert.DeserializeObject(content); // Assuming JSON response
 
-
+                    //read the json authorization if authorization is admin then this line of code will be run
                     if (jsonObject.authorization == "admin")
                     {
+                        //This line is responsible to put the jsonObject.authorization content into Local Storage which is on session so i can access this globally
                         HttpContext.Session.SetString("authorization", $"{jsonObject.authorization}");
+                        //This part is put those thing into global using viewbag
                         ViewBag.Hasauthorization = true;
                         ViewBag.Username = "admin";
                         HttpContext.Session.SetString("user", user);
+                        //This line is responsible to put the jsonObject.studentId  which is (int) content into Local Storage which is on session so we can access this globally
                         HttpContext.Session.SetInt32("studentId", (int)jsonObject.studentId);
                         return RedirectToAction("Index", "AdminHomepage"); // Use correct controller name
                     }

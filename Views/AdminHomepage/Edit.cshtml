@@ -1,4 +1,5 @@
-﻿@model BooksLog
+﻿<!--this part is to Enumerate the MODEL will use to this CSHTML  ex. <BooksLog>-->
+@model BooksLog
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -8,11 +9,16 @@
                     <h1 class="text-center">Edit User Account</h1>
                 </div>
                 <div class="card-body">
+                    <!-- this form will handle a post Request to controller-->
                     <form method="post" asp-controller="AdminHomepage" asp-action="Edit">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <!-- we need a hidden id to be use as the unique identifier of a data -->
                         <input type="hidden" asp-for="id" />
 
+                        <!-- student_id_fk is the column of the table, which is from on the model, same to  book_id,book_get_date,book_due_date -->
+
                         <div class="mb-3">
+                           
                             <label asp-for="student_id_fk" class="form-label">Student ID</label>
                             <input asp-for="student_id_fk" type="text" class="form-control" />
                             <span asp-validation-for="student_id_fk" class="text-danger"></span>

@@ -10,7 +10,9 @@
         <div class="row d-flex justify-content-center mb-4">
             <!--Grid column-->
             <div class="col-md-10">
+                <!--this part is to Enumerate the MODEL will use to this CSHTML  ex. <BooksLog>-->
                 @model IEnumerable<BooksLog>
+                <!-- this is the "button" to redirect to controller which is adminhomepage the action which is the AddBooksLogs-->
                 <a asp-controller="AdminHomepage" asp-action="AddBooksLogs" class="btn btn-success d-block mb-3 text-center mx-2 text-decoration-none" type="button">Request</a>
                 <!-- Inline CSS -->
                 <div class="d-flex justify-content-between">
@@ -40,9 +42,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- This Part is to Display Each content of the Database -->
+                        <!-- all the content is put to varaible "books"" obj -->
                         @foreach (var books in Model)
                         {
                             <tr>
+                                <!-- This Part will Display Each the Content and ther column name ex. books.student_fullname , student_fullname is the column name-->
                                 <th scope="row">@books.id</th>
                                 <td>@books.student_fullname</td>
                                 <td>@books.student_id_fk</td>
@@ -50,9 +55,11 @@
                                 <td>@books.book_title</td>
                                 <td>@books.book_author</td>
                                 <td>@books.book_category</td>
+                                <!-- This Part Convert the ex. 2024-05-05 to May 5, 2024 -->
                                 <td>@DateTime.ParseExact(books.book_get_date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("MMMM dd, yyyy")</td>
                                 <td>@DateTime.ParseExact(books.book_due_date, "yyyy-MM-dd", CultureInfo.InvariantCulture).ToString("MMMM dd, yyyy")</td>
                                 <td class="d-flex">
+                                    <!-- This Part is the button to Redirect to controller then pass the ID using asp-route-id it will pass to action ex. EDIT then this it way we can manipulate a single data because of its unique id -->
                                     <a asp-controller="AdminHomepage" asp-action="Edit" asp-route-id="@books.id" class="btn btn-primary my-3 text-center mx-2 text-decoration-none" type="button">EDIT</a>
                                     <a asp-controller="AdminHomepage" asp-action="Delete" asp-route-id="@books.id" class="btn btn-danger my-3 text-center text-decoration-none" type="button">DELETE</a>
                                 </td>

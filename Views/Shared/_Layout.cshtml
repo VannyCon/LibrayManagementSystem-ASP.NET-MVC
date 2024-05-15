@@ -10,6 +10,9 @@
 </head>
 <body>
     <header>
+        <!-- viewbag is from the controller which will became true of the user is already login -->
+        <!--  then if "admin" this only the part will be show -->
+
         @if (ViewBag.Hasauthorization == true && ViewBag.Username == "admin")
         {
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -44,6 +47,7 @@
         }
         else if (ViewBag.Hasauthorization == true && ViewBag.Username == "user")
         {
+            <!--  then if "admin" this only the part will be show -->
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library System</a>

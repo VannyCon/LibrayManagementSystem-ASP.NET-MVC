@@ -1,5 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
-
+//to Add Session in thi SYSTEM
 builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -16,6 +16,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+//to Allow Session in thi SYSTEM
 app.UseSession();
 app.UseRouting();
 
